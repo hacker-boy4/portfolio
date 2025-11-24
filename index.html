@@ -44,7 +44,38 @@ footer {background:#000; border-top:1px solid #00eaff; padding:40px 0; text-alig
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body onload="startTerminalIntro()">
-
+<div id="terminalIntro" style="position:fixed;top:0;left:0;width:100%;height:100vh;background:black;z-index:9999;color:#00eaff;font-family:monospace;padding:40px;display:flex;justify-content:flex-start;align-items:flex-start;font-size:18px;overflow:hidden;">
+<span id="terminalText"></span>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Ahmed Yasin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="hero position-relative animate__animated animate__fadeIn" id="home">
+  <div id="particles-js" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1"></div>
+  <div style="position:relative;z-index:2;">
+    <h1 class="animate__animated animate__fadeInDown">Hey, I'm <span class="text-info">Ahmed Yasin</span></h1>
+    <p class="animate__animated animate__fadeInUp">Web Developer | Cyber Security Enthusiast</p>
+    <a href="#projects" class="btn btn-info btn-lg mt-4 animate__animated animate__zoomIn">View My Work</a>
+  </div>
+</section>
+<script>
+particlesJS("particles-js", {
+  particles: {number:{value:80}, size:{value:3}},
+  interactivity:{events:{onhover:{enable:true,mode:"repulse"}}}
+});
+</script>
 <section id="about" class="container py-5">
   <h2 class="section-title text-center animate__animated animate__fadeIn">About Me</h2>
   <div class="row align-items-center">
@@ -57,15 +88,149 @@ footer {background:#000; border-top:1px solid #00eaff; padding:40px 0; text-alig
     </div>
   </div>
 </section>
+<canvas id="matrixHero" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.12;z-index:-1;"" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.18;z-index:0;"></canvas>
+<script>
+const heroCanvas = document.getElementById('matrixHero');
+const heroCtx = heroCanvas.getContext('2d');
+heroCanvas.height = document.querySelector('.hero').offsetHeight;
+heroCanvas.width = document.querySelector('.hero').offsetWidth;
+const chars = '01<>/[]{}#*&$%';
+const fs = 14;
+const cols = heroCanvas.width / fs;
+const rain = Array(Math.floor(cols)).fill(1);
+function drawSoftMatrix(){
+ heroCtx.fillStyle='rgba(0,0,10,0.08)'; heroCtx.fillRect(0,0,heroCanvas.width,heroCanvas.height);
+ heroCtx.fillStyle='#00eaff'; heroCtx.font=fs+'px Orbitron';
+ for(let i=0;i<rain.length;i++){
+   const txt = chars[Math.floor(Math.random()*chars.length)];
+   heroCtx.fillText(txt, i*fs, rain[i]*fs);
+   if(rain[i]*fs > heroCanvas.height && Math.random()>0.98) rain[i]=0;
+   rain[i]++;
+ }
+}
+setInterval(drawSoftMatrix, 60);
+window.addEventListener('resize',()=>{
+ heroCanvas.height=document.querySelector('.hero').offsetHeight;
+ heroCanvas.width=document.querySelector('.hero').offsetWidth;
+});
+</script>
 
-
-
-
-<footer style="background:#000;padding:6px 0;text-align:center;border-top:1px solid #00eaff;box-shadow:0 0 12px #00eaff;margin-top:60px;">
-  <p style="margin:0;font-size:10px;color:#00eaff;">© 2025 Ahmed Yasin — All Rights Reserved</p>
-</footer>
+<section id="contact" class="container py-5">
+  <h2 class="section-title text-center">Contact</h2>
+  <div class="text-center">
+    <p>Feel free to reach out for collaborations or projects.</p>
+    <a href="mailto:ahmedyasinv.m@gmail.com" class="btn btn-outline-info">Email Me</a>
+  </div>
+</section>
+<section id="skills" class="container py-5">
+  <h2 class="section-title text-center animate__animated animate__fadeIn">Skill Tree</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-3 text-center mb-4">
+      <div class="card p-3" style="border-radius:20px;">
+        <h4>Frontend</h4>
+        <ul style="list-style:none;padding:0;">
+          <li>HTML5</li>
+          <li>CSS3 / SCSS</li>
+          <li>JavaScript</li>
+          <li>Bootstrap</li>
+          <li>ReactJS</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-3 text-center mb-4">
+      <div class="card p-3" style="border-radius:20px;">
+        <h4>Backend</h4>
+        <ul style="list-style:none;padding:0;">
+          <li>Node.js</li>
+          <li>Express</li>
+          <li>MongoDB</li>
+          <li>REST API</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-3 text-center mb-4">
+      <div class="card p-3" style="border-radius:20px;">
+        <h4>Cyber Security</h4>
+        <ul style="list-style:none;padding:0;">
+          <li>Linux Tools</li>
+          <li>Network Analysis</li>
+          <li>BurpSuite</li>
+          <li>Nmap / Wireshark</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <p>© 2025 Ahmed Yasin — All Rights Reserved</p>
+<section id="social" class="container text-center py-4">
+  <h2 class="section-title animate__animated animate__fadeIn">Connect With Me</h2>
+  <a href="https://linkedin.com" target="_blank" class="btn btn-info m-2">LinkedIn</a>
+  <a href="https://github.com" target="_blank" class="btn btn-info m-2">GitHub</a>
+  <a href="https://instagram.com" target="_blank" class="btn btn-info m-2">Instagram</a>
+</section>
+<footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+<script>
+// Typing animation
+const text = document.querySelector('.hero p');
+new Typewriter(text, {loop:true})
+  .typeString('Web Developer | Cyber Security Enthusiast')
+  .pauseFor(1500)
+  .deleteAll()
+  .typeString('Creating Futuristic Web Experiences')
+  .pauseFor(1500)
+  .start();
+
+// Glitch effect
+const glitch = document.querySelector('h1');
+setInterval(()=>{ glitch.classList.toggle('glitch'); }, 2000);
+
+// Cursor parallax
+const hero = document.querySelector('.hero');
+hero.addEventListener('mousemove', e => {
+  const x = (window.innerWidth - e.pageX*2)/90;
+  const y = (window.innerHeight - e.pageY*2)/90;
+  hero.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+</script>
+<!-- Matrix temporarily disabled due to visibility issues -->
+<script>
+function startTerminalIntro(){
+  const intro = document.getElementById('terminalIntro');
+  const textBox = document.getElementById('terminalText');
+  const lines = [
+    'Initializing system ...',
+    'Loading cyber interface ...',
+    'Decrypting identity signature ...',
+    'Access Granted: Welcome Ahmed Yasin',
+    'Launching Portfolio Environment ...'
+  ];
+  let lineIndex = 0;
+  function typeLine(){
+    if(lineIndex < lines.length){
+      let charIndex = 0;
+      const interval = setInterval(()=>{
+        textBox.textContent = lines[lineIndex].slice(0, charIndex);
+        charIndex++;
+        if(charIndex > lines[lineIndex].length){
+          clearInterval(interval);
+          textBox.innerHTML += '<br>'; lineIndex++;
+          setTimeout(typeLine, 700);
+        }
+      }, 40);
+    } else {
+      setTimeout(()=>{
+        intro.style.transition = '1s';
+        intro.style.opacity = 0;
+        setTimeout(()=> intro.remove(), 1100);
+      }, 1200);
+    }
+  }
+  typeLine();
+}
+</script>
 </body>
 </html>
