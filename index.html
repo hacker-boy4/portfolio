@@ -44,38 +44,7 @@ footer {background:#000; border-top:1px solid #00eaff; padding:40px 0; text-alig
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body onload="startTerminalIntro()">
-<div id="terminalIntro" style="position:fixed;top:0;left:0;width:100%;height:100vh;background:black;z-index:9999;color:#00eaff;font-family:monospace;padding:40px;display:flex;justify-content:flex-start;align-items:flex-start;font-size:18px;overflow:hidden;">
-<span id="terminalText"></span>
-</div>
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">Ahmed Yasin</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href=\"#about\">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<section class="hero position-relative animate__animated animate__fadeIn" id="home">
-  <div id="particles-js" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1"></div>
-  <div style="position:relative;z-index:2;">
-    <h1 class="animate__animated animate__fadeInDown">Hey, I'm <span class="text-info">Ahmed Yasin</span></h1>
-    <p class="animate__animated animate__fadeInUp">Web Developer | Cyber Security Enthusiast</p>
-    <a href="#about" class="btn btn-info btn-lg mt-4 animate__animated animate__zoomIn">About Me</a>
-  </div>
-</section>
-<script>
-particlesJS("particles-js", {
-  particles: {number:{value:80}, size:{value:3}},
-  interactivity:{events:{onhover:{enable:true,mode:"repulse"}}}
-});
-</script>
+
 <section id="about" class="container py-5">
   <h2 class="section-title text-center animate__animated animate__fadeIn">About Me</h2>
   <div class="row align-items-center">
@@ -88,32 +57,7 @@ particlesJS("particles-js", {
     </div>
   </div>
 </section>
-<canvas id="matrixHero" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.12;z-index:-1;"" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.18;z-index:0;"></canvas>
-<script>
-const heroCanvas = document.getElementById('matrixHero');
-const heroCtx = heroCanvas.getContext('2d');
-heroCanvas.height = document.querySelector('.hero').offsetHeight;
-heroCanvas.width = document.querySelector('.hero').offsetWidth;
-const chars = '01<>/[]{}#*&$%';
-const fs = 14;
-const cols = heroCanvas.width / fs;
-const rain = Array(Math.floor(cols)).fill(1);
-function drawSoftMatrix(){
- heroCtx.fillStyle='rgba(0,0,10,0.08)'; heroCtx.fillRect(0,0,heroCanvas.width,heroCanvas.height);
- heroCtx.fillStyle='#00eaff'; heroCtx.font=fs+'px Orbitron';
- for(let i=0;i<rain.length;i++){
-   const txt = chars[Math.floor(Math.random()*chars.length)];
-   heroCtx.fillText(txt, i*fs, rain[i]*fs);
-   if(rain[i]*fs > heroCanvas.height && Math.random()>0.98) rain[i]=0;
-   rain[i]++;
- }
-}
-setInterval(drawSoftMatrix, 60);
-window.addEventListener('resize',()=>{
- heroCanvas.height=document.querySelector('.hero').offsetHeight;
- heroCanvas.width=document.querySelector('.hero').offsetWidth;
-});
-</script>
+
 
 
 
